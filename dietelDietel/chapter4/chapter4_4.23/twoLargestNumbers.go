@@ -1,29 +1,51 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func twoLargestNumbers() {
-	fmt.Println()
 	var count int
-	var number int
-	var firstLargest int
-	var secondLargest int
+	fmt.Println("Enter the number of elements")
+	_, err := fmt.Scan(&count)
+	if err != nil {
+		return
+	}
 
-	for count = 0; count < 10; count++ {
+	values := make([]float64, count)
 
-		fmt.Println("Enter first number: ")
-		_, err := fmt.Scanf("%d", &number)
+	for index := 0; index < count; index++ {
+		var number float64
+		fmt.Printf("Enter unique value  %d: ", index+1)
+		_, err := fmt.Scanf("%f", &number)
 		if err != nil {
-			fmt.Println("Invalid input")
-			return
+			fmt.Println("Invalid input. Please enter a valid number.")
+			index--
+			continue
 		}
 
-		if number > firstLargest {
-			firstLargest = number
+		if contains(values[:index], number) {
+			fmt.Println("Number already entered. Please choose a unique value.")
+			index--
+			continue
 		}
-		if number < secondLargest {
-			secondLargest = number
+
+		values[index] = number
+	}
+
+	sort.Slice(values, func(index, indexTwo int) bool {
+		return values[index] > values[indexTwo]
+	})
+
+	fmt.Printf("The two largest unique values are %.2f and %.2f\n", values[0], values[1])
+}
+
+func contains(slice []float64, value float64) bool {
+	for _, v := range slice {
+		if v == value {
+			return true
 		}
 	}
-	fmt.Println(firstLargest, secondLargest)
+	return false
 }

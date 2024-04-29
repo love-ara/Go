@@ -3,38 +3,28 @@ package main
 import "fmt"
 
 func extremes() {
+	fmt.Println()
 	var count int
-	var maximum int
-	var minimum int
+	var number int
+	var firstLargest int
+	var secondLargest int
 
-	fmt.Print("Enter the number of values: ")
-	_, err := fmt.Scanf("%d", &count)
-	if err != nil {
-		fmt.Println("Invalid input. Please enter a valid integer.")
-		return
-	}
+	for count = 0; count < 10; count++ {
 
-	for index := 1; index <= count; index++ {
-		var number int
-		fmt.Printf("Enter value  %d: ", index)
+		fmt.Println("Enter first number: ")
 		_, err := fmt.Scanf("%d", &number)
 		if err != nil {
-			fmt.Println("Invalid input. Please enter a valid integer.")
-			continue
+			fmt.Println("Invalid input")
+			return
 		}
 
-		if index == 1 {
-			maximum, minimum = number, number
-		} else {
-			if number > maximum {
-				maximum = number
-			}
-			if number < minimum {
-				minimum = number
-			}
+		if number > firstLargest {
+			firstLargest = number
+		}
+		if number < secondLargest {
+			secondLargest = number
 		}
 	}
+	fmt.Println(firstLargest, secondLargest)
 
-	fmt.Println("Maximum value:", maximum)
-	fmt.Println("Minimum value:", minimum)
 }
