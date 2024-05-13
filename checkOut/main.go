@@ -14,8 +14,6 @@ type CheckOutApp struct {
 	amountPaid   float64
 }
 
-//i am need to push na
-
 func (c *CheckOutApp) getCurrentDateAndTime() string {
 	currentDateTime := time.Now()
 	dateTimeFormatter := "02-Jan-06 03:04:05 PM"
